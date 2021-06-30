@@ -21,6 +21,7 @@ const { Product } = require('./models/Product');
 app.use('/graphql', graphqlHTTP({
   schema: graphqlSchema,
   rootValue: graphqlResolver,
+  graphiql: true,
 }));
 
 // // Seeds injection.
