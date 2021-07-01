@@ -2,8 +2,8 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const express = require('express');
-const mongoose = require('mongoose');
 const { graphqlHTTP } = require('express-graphql');
+const mongoose = require('mongoose');
 
 const graphqlSchema = require('./graphql/schema');
 const graphqlResolver = require('./graphql/resolvers');

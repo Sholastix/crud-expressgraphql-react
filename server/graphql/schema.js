@@ -16,6 +16,8 @@ module.exports = buildSchema(`
 
   type RootMutation {
     createProduct(name: String!, price: Float!): Product!
+    updateProduct(_id: ID!, name: String!, price: Float!): Product!
+    deleteProduct(_id: ID!): Product!
   }
 
   schema {
