@@ -9,6 +9,10 @@ module.exports = buildSchema(`
     updatedAt: String!
   }
 
+  type DeleteResponse {
+    result: Boolean!
+  }
+
   type RootQuery {
     getProducts: [Product!]
     getProduct(_id: ID!): Product!
@@ -17,7 +21,7 @@ module.exports = buildSchema(`
   type RootMutation {
     createProduct(name: String!, price: Float!): Product!
     updateProduct(_id: ID!, name: String!, price: Float!): Product!
-    deleteProduct(_id: ID!): Product!
+    deleteProduct(_id: ID!): DeleteResponse
   }
 
   schema {

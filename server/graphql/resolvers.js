@@ -64,14 +64,13 @@ const updateProduct = async (args, req) => {
 // DELETE existing product.
 const deleteProduct = async (args, req) => {
   try {
-    const product = await Product.deleteOne({ _id: args._id });
-    if (product) {
-      console.log('Deleted successfully!', product);
-      return product;
+    const result = Boolean(await Product.deleteOne({ _id: args._id }));
+    if (result === true) {
+      console.log('DELETED SUCCESSFULLY!');
     } else {
-      console.log('Delete operaition failed!', product);
-      return product;
+      console.log('DELETE FAILED!');
     }
+    return { result };
   } catch (err) {
     console.error(err);
   };
