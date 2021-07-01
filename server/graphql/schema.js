@@ -9,18 +9,13 @@ module.exports = buildSchema(`
     updatedAt: String!
   }
 
-  input ProductInputData {
-    name: String!
-    price: Float!
-  }
-
   type RootQuery {
-    getProducts: Product
+    getProducts: [Product!]
     getProduct(_id: ID!): Product!
   }
 
   type RootMutation {
-    createProduct(productInput: ProductInputData): Product!
+    createProduct(name: String!, price: Float!): Product!
   }
 
   schema {
