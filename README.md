@@ -16,4 +16,8 @@ ___________________________________________________________________
         3.1. npm install
         3.2. npm start
 
-Endpoint: http://localhost:5000/graphql
+Endpoint: 
+
+        http://localhost:xxxx/graphql
+        
+(xxxx - your environment variable value in .env file).
