@@ -4,7 +4,7 @@ import { Button, Form, FormGroup, Input, Label, Modal, ModalHeader, ModalBody, M
 
 import './App.css';
 
-import { gqlGetProducts, gqlAddProduct, gqlDeleteProduct } from './graphql/queries';
+import { gqlGetProducts, gqlGetProduct, gqlAddProduct, gqlUpdateProduct, gqlDeleteProduct } from './graphql/queries';
 
 const App = () => {
 
@@ -71,8 +71,6 @@ const App = () => {
                 })),
             });
 
-            console.log(result)
-
             const newProduct = result.data.data.createProduct;
             const updProducts = [...products, { ...newProduct }];
 
@@ -84,37 +82,56 @@ const App = () => {
         };
     };
 
-    // EDIT - NOT READY YET.
-    const updateProductHandler = async () => {
+    // EDIT
+    const updateProductHandler = async (_id) => {
         try {
-            await axios.put('http://localhost:5000/api/products/' + editProductId, {
-                name: editProductName,
-                price: editProductPrice,
+            // // VARIANT 1 - short but with unneсessary additional request.
+            // await axios({
+            //     method: 'POST',
+            //     url: 'http://localhost:5000/graphql',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     data: JSON.stringify(gqlUpdateProduct({
+            //         _id: editProductId,
+            //         name: editProductName,
+            //         price: editProductPrice,
+            //     })),
+            // });
+
+            // toggleEditProductModal();
+            // getProducts();
+
+            // VARIANT 2.
+            const result = await axios({
+                method: 'POST',
+                url: 'http://localhost:5000/graphql',
+                headers: { 'Content-Type': 'application/json' },
+                data: JSON.stringify(gqlUpdateProduct({
+                    _id: editProductId,
+                    name: editProductName,
+                    price: editProductPrice,
+                })),
             });
-            const index = products.findIndex((el) => el.id === editProductId);
-            const oldElement = products[index];
-            const updElement = {
-                ...oldElement,
-                name: editProductName,
-                price: editProductPrice,
-            };
+
+            const updElement = result.data.data.updateProduct;
+            const index = products.findIndex((el) => el._id === editProductId);
+
             const updProducts = [
                 ...products.slice(0, index),
                 updElement,
                 ...products.slice(index + 1)
             ];
+
             setProducts(updProducts);
             toggleEditProductModal();
-            getProducts();
         } catch (err) {
             console.error(err);
         };
     };
 
-    const editProductHandler = async (id) => {
+    const editProductHandler = async (_id) => {
         try {
-            const product = products.find((el) => el.id === id);
-            setEditProductId(id);
+            const product = products.find((el) => el._id === _id);
+            setEditProductId(_id);
             setEditProductName(product.name);
             setEditProductPrice(product.price);
             toggleEditProductModal();
@@ -140,7 +157,7 @@ const App = () => {
                 ...products.slice(0, index),
                 ...products.slice(index + 1),
             ];
-            
+
             setProducts(updProducts);
         } catch (err) {
             console.error(err);
