@@ -11,7 +11,7 @@ ___________________________________________________________________
 
 2.  Rename file '.env.example' into '.env' and setup enviroment variables.
 
-3.  Use following commands from terminal/console:
+3.  Use following commands (in 'server' folder, then in 'client' folder respectively) from terminal/console:
    
         3.1. npm install
         3.2. npm start

@@ -7,6 +7,8 @@ export const gqlGetProducts = () => {
                     _id 
                     name
                     price
+                    createdAt
+                    updatedAt
                 }
             }
         `
