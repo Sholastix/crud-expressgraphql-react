@@ -1,9 +1,9 @@
-# crud-graphql-react
+# crud-expressgraphql-react
 
 Example of CRUD basic functionality in MongoDB with help of GraphQL.
 
     Front:      React + GraphQL.
-    Back:       Node + Express + GraphQL.
+    Back:       Node + Express + GraphQL (express-graphql).
     Database:   MongoDB + Mongoose.
 ___________________________________________________________________
 
